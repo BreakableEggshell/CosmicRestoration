@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhdt7j761e223"]
+[gd_scene load_steps=9 format=3 uid="uid://dhdt7j761e223"]
 
-[ext_resource type="Script" uid="uid://nuvhs8hh2pfk" path="res://scene/player.gd" id="1_hjaqi"]
+[ext_resource type="Script" uid="uid://nuvhs8hh2pfk" path="res://script/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/MC_SpriteSheet.png" id="1_xo3ru"]
 
 [sub_resource type="Animation" id="Animation_hjaqi"]
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [2, 3]
+"values": [4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_fvtld"]
@@ -52,9 +52,27 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_s4jxa"]
+resource_name = "Move_Jump"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s4jxa"]
 _data = {
 &"Move_Idle": SubResource("Animation_hjaqi"),
+&"Move_Jump": SubResource("Animation_s4jxa"),
 &"Move_Walk": SubResource("Animation_ct4mp"),
 &"RESET": SubResource("Animation_fvtld")
 }
@@ -72,8 +90,8 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xo3ru")
-hframes = 2
-vframes = 2
+hframes = 4
+vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)

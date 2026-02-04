@@ -168,7 +168,7 @@ sources/0 = SubResource("TileSetAtlasSource_4j5ol")
 [node name="Main" type="Node2D"]
 
 [node name="Background1" type="Sprite2D" parent="."]
-position = Vector2(579.25006, 567.25)
+position = Vector2(571, 665.00006)
 scale = Vector2(72.46876, 46.781258)
 texture = ExtResource("1_wp4xf")
 

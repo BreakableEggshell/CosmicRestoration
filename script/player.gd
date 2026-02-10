@@ -1,3 +1,6 @@
+# To Do:
+# Switch Dash to using the Timer Nodes
+
 extends CharacterBody2D
 
 const SPEED = 150.0
@@ -10,17 +13,17 @@ const DASH_COOLDOWN = 0.5
 @onready var player_animation: AnimationPlayer = $AnimationPlayer
 @onready var player_sprite: Sprite2D = $Sprite2D
 
-var is_dashing = false
-var dash_timer = 0.0
-var dash_cooldown_timer = 0.0
-var dash_direction = 0
+# Dash Mechanics
+var is_dashing := false
+var dash_timer := 0.0
+var dash_cooldown_timer := 0.0
+var dash_direction := 0
 
 
 func _physics_process(delta: float) -> void:
 
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
-
 
 	if is_dashing:
 		dash_timer -= delta
@@ -70,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func start_dash(direction: float) -> void:
+func start_dash(direction: int) -> void:
 	is_dashing = true
 	dash_timer = DASH_TIME
 	dash_cooldown_timer = DASH_COOLDOWN
@@ -80,3 +83,9 @@ func start_dash(direction: float) -> void:
 		dash_direction = -1 if player_sprite.flip_h else 1
 	else:
 		dash_direction = sign(direction)
+
+func _on_dash_cooldown_time_timeout() -> void:
+	pass # Replace with function body.
+
+func _on_dash_time_timeout() -> void:
+	pass # Replace with function body.

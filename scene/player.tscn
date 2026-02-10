@@ -1,7 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhdt7j761e223"]
+[gd_scene load_steps=14 format=3 uid="uid://dhdt7j761e223"]
 
 [ext_resource type="Script" uid="uid://nuvhs8hh2pfk" path="res://script/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/MC_SpriteSheet.png" id="1_xo3ru"]
+[ext_resource type="Script" uid="uid://bsf17m36c2csr" path="res://script/state_machine.gd" id="2_fvtld"]
+[ext_resource type="Script" uid="uid://bwi5bnab4k3pj" path="res://script/idle.gd" id="3_hp4bs"]
+[ext_resource type="Script" uid="uid://chhorr4nuo50n" path="res://script/run.gd" id="4_g2vtq"]
+[ext_resource type="Script" uid="uid://dc5fa755sxh2i" path="res://script/jump.gd" id="5_2fvbb"]
+[ext_resource type="Script" uid="uid://chp46g4saua65" path="res://script/dash.gd" id="6_ml7e8"]
 
 [sub_resource type="Animation" id="Animation_hjaqi"]
 resource_name = "Move_Idle"
@@ -37,23 +42,6 @@ tracks/0/keys = {
 "values": [10, 11, 12, 13]
 }
 
-[sub_resource type="Animation" id="Animation_ct4mp"]
-resource_name = "Move_Walk"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 5]
-}
-
 [sub_resource type="Animation" id="Animation_fvtld"]
 length = 0.001
 tracks/0/type = "value"
@@ -69,11 +57,28 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_ct4mp"]
+resource_name = "Move_Run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s4jxa"]
 _data = {
 &"Move_Idle": SubResource("Animation_hjaqi"),
 &"Move_Jump": SubResource("Animation_s4jxa"),
-&"Move_Walk": SubResource("Animation_ct4mp"),
+&"Move_Run": SubResource("Animation_ct4mp"),
 &"RESET": SubResource("Animation_fvtld")
 }
 
@@ -82,6 +87,21 @@ size = Vector2(13, 15)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_hjaqi")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_fvtld")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_hp4bs")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("4_g2vtq")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("5_2fvbb")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("6_ml7e8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -97,13 +117,13 @@ vframes = 4
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_hjaqi")
 
-[node name="DashCooldownTime" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="DashTime" type="Timer" parent="."]
+[node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
-[connection signal="timeout" from="DashCooldownTime" to="." method="_on_dash_cooldown_time_timeout"]
-[connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

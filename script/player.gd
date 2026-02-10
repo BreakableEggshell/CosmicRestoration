@@ -1,91 +1,34 @@
-# To Do:
-# Switch Dash to using the Timer Nodes
-
 extends CharacterBody2D
+
+var can_dash : bool = true
+var dash_direction : int = 1
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
 const DASH_SPEED = 400.0
-const DASH_TIME = 0.15
-const DASH_COOLDOWN = 0.5
 
 @onready var player_animation: AnimationPlayer = $AnimationPlayer
 @onready var player_sprite: Sprite2D = $Sprite2D
 
-# Dash Mechanics
-var is_dashing := false
-var dash_timer := 0.0
-var dash_cooldown_timer := 0.0
-var dash_direction := 0
+@onready var dash_timer: Timer = $DashTimer
+@onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 
+@onready var state_machine: StateMachine = $StateMachine
+@onready var idle_state: State = $StateMachine/Idle
+@onready var run_state: State  = $StateMachine/Run
+@onready var jump_state: State  = $StateMachine/Jump
+@onready var dash_state: State  = $StateMachine/Dash
+
+func _ready():
+	state_machine.change_state($StateMachine/Idle)
 
 func _physics_process(delta: float) -> void:
-
-	if dash_cooldown_timer > 0:
-		dash_cooldown_timer -= delta
-
-	if is_dashing:
-		dash_timer -= delta
-		velocity.x = dash_direction * DASH_SPEED
-		velocity.y = 0
-
-		if dash_timer <= 0:
-			is_dashing = false
-
-	else:
-		# Gravity
-		if not is_on_floor():
-			velocity += get_gravity() * delta
-
-		# Jump
-		if Input.is_action_just_pressed("move_jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			
-
-		# Movement
-		var direction := Input.get_axis("move_left", "move_right")
-		if direction:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-
-		# Dash input
-		if Input.is_action_just_pressed("move_dash") and dash_cooldown_timer <= 0:
-			start_dash(direction)
-
-
-	if is_dashing:
-		player_animation.play("Move_Walk") 
-	elif not is_on_floor():
-		if player_animation.current_animation != "Move_Jump":
-				player_animation.play("Move_Jump")
-	elif is_on_floor():
-		player_animation.play("Move_Walk" if velocity.x != 0 else "Move_Idle")
-	else:
-		player_animation.play("Move_Idle")
-
-	# Sprite flip
-	if velocity.x > 0:
-		player_sprite.flip_h = false
-	elif velocity.x < 0:
-		player_sprite.flip_h = true
+	state_machine.physics_update(delta)
 	move_and_slide()
 
+func _on_dash_timer_timeout() -> void:
+	state_machine.change_state($StateMachine/Idle)
 
-func start_dash(direction: int) -> void:
-	is_dashing = true
-	dash_timer = DASH_TIME
-	dash_cooldown_timer = DASH_COOLDOWN
-
-
-	if direction == 0:
-		dash_direction = -1 if player_sprite.flip_h else 1
-	else:
-		dash_direction = sign(direction)
-
-func _on_dash_cooldown_time_timeout() -> void:
-	pass # Replace with function body.
-
-func _on_dash_time_timeout() -> void:
-	pass # Replace with function body.
+func _on_dash_cooldown_timer_timeout() -> void:
+	can_dash = true

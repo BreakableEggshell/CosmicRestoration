@@ -1,6 +1,8 @@
 extends State
 class_name FallState
 
+@onready var dash_state: DashState = $"../DashState"
+
 func enter():
 	print("Entering Fall State")
 	player_animation.play("Move_Fall")
@@ -28,3 +30,7 @@ func physics_update(delta: float):
 			state_machine.change_state("walkstate")
 		else:
 			state_machine.change_state("idlestate")
+
+func handle_input(event: InputEvent):
+	if event.is_action_pressed("move_dash") and dash_state.dash_ready:
+		state_machine.change_state("dashstate")

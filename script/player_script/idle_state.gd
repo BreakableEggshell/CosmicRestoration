@@ -1,6 +1,8 @@
 extends State
 class_name IdleState
 
+@onready var dash_state: DashState = $"../DashState"
+
 func enter():
 	print("Entering idle state")
 	player_animation.play("Move_Idle")
@@ -21,13 +23,7 @@ func physics_update(delta: float):
 	# Walk
 	if direction != 0:
 		state_machine.change_state("walkstate")
-		return
-	
 
-'''
 func handle_input(event: InputEvent):
-	if Input.is_action_pressed("move_left") or Input.is_action_just_pressed("move_right"):
-		state_machine.change_state("walkstate")
-	elif Input.is_action_just_pressed("move_jump"):
-		state_machine.change_state("jumpstate")
-'''
+	if event.is_action_pressed("move_dash") and dash_state.dash_ready:
+		state_machine.change_state("dashstate")

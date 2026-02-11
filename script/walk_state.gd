@@ -1,8 +1,6 @@
 extends State
 class_name WalkState
 
-const WALK_SPEED := 200.0
-
 func enter():
 	print("Entering walk state")
 

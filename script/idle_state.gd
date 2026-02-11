@@ -6,12 +6,6 @@ func enter():
 
 func physics_update(delta: float):
 	var character = state_machine.player
-
-	# Walk
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction != 0:
-		state_machine.change_state("walkstate")
-		return
 	
 	# Fall
 	if not character.is_on_floor():
@@ -20,6 +14,13 @@ func physics_update(delta: float):
 	# Jump
 	if Input.is_action_just_pressed("move_jump"):
 		state_machine.change_state("jumpstate")
+	
+	# Walk
+	var direction = Input.get_axis("move_left", "move_right")
+	if direction != 0:
+		state_machine.change_state("walkstate")
+		return
+	
 
 '''
 func handle_input(event: InputEvent):

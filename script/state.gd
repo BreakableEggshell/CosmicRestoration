@@ -3,6 +3,10 @@ class_name State
 
 var state_machine : StateMachine
 
+const WALK_SPEED := 200.0
+const GRAVITY := 980.0
+const JUMP_VELOCITY := -400.0
+
 func enter(): pass
 func exit(): pass
 func update(delta: float): pass

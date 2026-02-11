@@ -1,9 +1,6 @@
 extends State
 class_name JumpState
 
-const JUMP_VELOCITY := -400.0
-const GRAVITY := 980.0
-
 func enter():
 	print("Entering jump state")
 	var character = state_machine.player
@@ -12,7 +9,13 @@ func enter():
 func physics_update(delta: float):
 	var character = state_machine.player
 	
+	# Apply gravity
 	character.velocity.y += GRAVITY * delta
+	
+	# Allow left & right movement
+	var direction = Input.get_axis("move_left", "move_right")
+	character.velocity.x = direction * WALK_SPEED
+	
 	character.move_and_slide()
 	
 	# Upward motion finished -> fall

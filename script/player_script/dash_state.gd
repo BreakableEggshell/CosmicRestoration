@@ -21,8 +21,8 @@ func enter():
 	player.velocity.y = 0
 
 	# Start dash duration
-	$DashTime.start()
-	$DashCooldownTime.start()
+	$DashTimer.start()
+	$DashCooldownTimer.start()
 
 func physics_update(delta: float):
 	var player = state_machine.player

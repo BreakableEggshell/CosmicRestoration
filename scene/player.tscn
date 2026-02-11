@@ -154,13 +154,13 @@ script = ExtResource("6_oh5ij")
 [node name="DashState" type="Node" parent="StateMachine"]
 script = ExtResource("8_g2vtq")
 
-[node name="DashTime" type="Timer" parent="StateMachine/DashState"]
+[node name="DashTimer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.15
 one_shot = true
 
-[node name="DashCooldownTime" type="Timer" parent="StateMachine/DashState"]
+[node name="DashCooldownTimer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="timeout" from="StateMachine/DashState/DashTime" to="StateMachine/DashState" method="_on_dash_time_timeout"]
-[connection signal="timeout" from="StateMachine/DashState/DashCooldownTime" to="StateMachine/DashState" method="_on_dash_cooldown_time_timeout"]
+[connection signal="timeout" from="StateMachine/DashState/DashTimer" to="StateMachine/DashState" method="_on_dash_time_timeout"]
+[connection signal="timeout" from="StateMachine/DashState/DashCooldownTimer" to="StateMachine/DashState" method="_on_dash_cooldown_time_timeout"]

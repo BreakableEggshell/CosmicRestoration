@@ -3,9 +3,12 @@ class_name IdleState
 
 func enter():
 	print("Entering idle state")
+	player_animation.play("Move_Idle")
 
 func physics_update(delta: float):
 	var character = state_machine.player
+	
+	var direction = Input.get_axis("move_left", "move_right")
 	
 	# Fall
 	if not character.is_on_floor():
@@ -16,7 +19,6 @@ func physics_update(delta: float):
 		state_machine.change_state("jumpstate")
 	
 	# Walk
-	var direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		state_machine.change_state("walkstate")
 		return

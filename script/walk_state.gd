@@ -3,6 +3,7 @@ class_name WalkState
 
 func enter():
 	print("Entering walk state")
+	player_animation.play("Move_Walk")
 
 func physics_update(delta: float):
 	var character = state_machine.player
@@ -11,6 +12,12 @@ func physics_update(delta: float):
 
 	character.velocity.x = direction * WALK_SPEED
 	character.move_and_slide()
+	
+		# Player sprite direction
+	if direction > 0:
+		player_sprite.flip_h = false
+	elif direction < 0:
+		player_sprite.flip_h = true
 
 	# Idle
 	if direction == 0:

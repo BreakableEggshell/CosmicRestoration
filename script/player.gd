@@ -1,4 +1,3 @@
 extends CharacterBody2D
 
-@onready var player_animation: AnimationPlayer = $AnimationPlayer
- 
+@onready var player_anim: AnimationPlayer = $AnimationPlayer

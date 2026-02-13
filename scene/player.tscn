@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhdt7j761e223"]
+[gd_scene load_steps=24 format=3 uid="uid://dhdt7j761e223"]
 
 [ext_resource type="Script" uid="uid://dlvy6jx5xikwe" path="res://script/player_script/player.gd" id="1_hp4bs"]
 [ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/player/MC_SpriteSheet.png" id="1_xo3ru"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://0fjsm4bxdi87" path="res://script/player_script/jump_state.gd" id="6_g2vtq"]
 [ext_resource type="Script" uid="uid://1htppsfdx5t5" path="res://script/player_script/fall_state.gd" id="6_oh5ij"]
 [ext_resource type="Script" uid="uid://by1uur5fg6pm0" path="res://script/player_script/dash_state.gd" id="8_g2vtq"]
+[ext_resource type="Texture2D" uid="uid://1ugfvkrhjwmi" path="res://assets/player/particle2.png" id="11_ihjo1"]
 
 [sub_resource type="Animation" id="Animation_ihjo1"]
 resource_name = "Attack_Bow_Normal"
@@ -173,6 +174,27 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
 size = Vector2(13, 15)
 
+[sub_resource type="Curve" id="Curve_dk1vr"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8467434, 0.96221876), 0.0, 0.0, 0, 0, Vector2(1, 0.52331185), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_34jf3"]
+curve = SubResource("Curve_dk1vr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7b46"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 49.999996
+linear_accel_max = 49.999996
+scale_min = 2.0
+scale_max = 4.0
+scale_over_velocity_curve = SubResource("CurveTexture_34jf3")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_hp4bs")
 
@@ -232,6 +254,15 @@ one_shot = true
 [node name="DashCooldownTimer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.5
 one_shot = true
+
+[node name="CloudDashPoof" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = ExtResource("11_ihjo1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_u7b46")
 
 [connection signal="timeout" from="StateMachine/DashState/DashTimer" to="StateMachine/DashState" method="_on_dash_time_timeout"]
 [connection signal="timeout" from="StateMachine/DashState/DashCooldownTimer" to="StateMachine/DashState" method="_on_dash_cooldown_time_timeout"]

@@ -168,7 +168,9 @@ offset_top = -81.0
 offset_right = 144.0
 offset_bottom = 81.0
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="FloorParticle" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(735, 290)
+emitting = false
 texture = ExtResource("5_0ha60")
 process_material = SubResource("ParticleProcessMaterial_tqoya")

@@ -11,7 +11,6 @@ var dash_ready = true
 func enter():
 	print("Entering dash state")
 	player_animation.play("Move_Dash")
-	cloud_dash_poof.restart()
 
 	# Check which direction to dash into, and dash to that
 	dash_direction = Input.get_axis("move_left", "move_right")
@@ -19,6 +18,12 @@ func enter():
 
 	if dash_direction == 0:
 		dash_direction = -1 if player_sprite.flip_h else 1
+	
+	# Decide direction of dash cloud animation and play
+	var mat := cloud_dash_poof.process_material as ParticleProcessMaterial
+	if mat:
+		mat.direction = Vector3(-dash_direction, 0, 0)
+	cloud_dash_poof.restart()
 
 	# Dash and player's y velocity is forced to 0
 	player.velocity.y = 0

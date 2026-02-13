@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://0fjsm4bxdi87" path="res://script/player_script/jump_state.gd" id="6_g2vtq"]
 [ext_resource type="Script" uid="uid://1htppsfdx5t5" path="res://script/player_script/fall_state.gd" id="6_oh5ij"]
 [ext_resource type="Script" uid="uid://by1uur5fg6pm0" path="res://script/player_script/dash_state.gd" id="8_g2vtq"]
-[ext_resource type="Texture2D" uid="uid://1ugfvkrhjwmi" path="res://assets/player/particle2.png" id="11_ihjo1"]
 [ext_resource type="Script" uid="uid://b1dsdq8opt3v7" path="res://script/player_script/bow_shoot_tap.gd" id="12_34jf3"]
+[ext_resource type="Texture2D" uid="uid://bnhxo0b544rwx" path="res://assets/player/particle.png" id="13_34jf3"]
 
 [sub_resource type="Animation" id="Animation_g2vtq"]
 resource_name = "Move_Dash"
@@ -231,7 +231,7 @@ size = Vector2(13, 15)
 
 [sub_resource type="Curve" id="Curve_dk1vr"]
 _limits = [0.0, 3.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8467434, 0.96221876), 0.0, 0.0, 0, 0, Vector2(1, 0.52331185), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8467434, 0.96221876), 0.0, 0.0, 0, 0, Vector2(1, 0.3352089), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_34jf3"]
@@ -239,15 +239,16 @@ curve = SubResource("Curve_dk1vr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7b46"]
 particle_flag_disable_z = true
-direction = Vector3(0, 0, 0)
-spread = 180.0
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(-1, 0, 0)
+spread = 90.0
 initial_velocity_min = 50.0
 initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
 linear_accel_min = 49.999996
 linear_accel_max = 49.999996
-scale_min = 2.0
-scale_max = 4.0
+scale_max = 3.0
 scale_over_velocity_curve = SubResource("CurveTexture_34jf3")
 
 [node name="Player" type="CharacterBody2D"]
@@ -323,7 +324,7 @@ one_shot = true
 [node name="CloudDashPoof" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 20
-texture = ExtResource("11_ihjo1")
+texture = ExtResource("13_34jf3")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0

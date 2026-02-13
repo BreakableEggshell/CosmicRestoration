@@ -1,8 +1,6 @@
 extends State
 class_name JumpState
 
-@onready var dash_state: DashState = $"../DashState"
-
 func enter():
 	print("Entering jump state")
 	player_animation.play("Move_Jump")
@@ -33,3 +31,6 @@ func physics_update(delta: float):
 func handle_input(event: InputEvent):
 	if event.is_action_pressed("move_dash") and dash_state.dash_ready:
 		state_machine.change_state("dashstate")
+	
+	if event.is_action_pressed("attack_tap"):
+		state_machine.change_state("bowshoottap")

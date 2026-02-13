@@ -1,20 +1,51 @@
-[gd_scene load_steps=17 format=3 uid="uid://dhdt7j761e223"]
+[gd_scene load_steps=24 format=3 uid="uid://dhdt7j761e223"]
 
 [ext_resource type="Script" uid="uid://dlvy6jx5xikwe" path="res://script/player_script/player.gd" id="1_hp4bs"]
-[ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/MC_SpriteSheet.png" id="1_xo3ru"]
+[ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/player/MC_SpriteSheet.png" id="1_xo3ru"]
+[ext_resource type="Texture2D" uid="uid://vs5e8iixb40u" path="res://assets/player/bow_tap_anim.png" id="2_2fvbb"]
 [ext_resource type="Script" uid="uid://3u76ojdj5gay" path="res://script/player_script/state_machine.gd" id="3_fvtld"]
+[ext_resource type="Texture2D" uid="uid://bp8ddnwfnrgl1" path="res://assets/player/sag_bow_draw_with_arrow.png" id="3_ml7e8"]
 [ext_resource type="Script" uid="uid://de6ukd555qmqk" path="res://script/player_script/idle_state.gd" id="4_oh5ij"]
 [ext_resource type="Script" uid="uid://cyamrgxstbyb7" path="res://script/player_script/walk_state.gd" id="5_hp4bs"]
 [ext_resource type="Script" uid="uid://0fjsm4bxdi87" path="res://script/player_script/jump_state.gd" id="6_g2vtq"]
 [ext_resource type="Script" uid="uid://1htppsfdx5t5" path="res://script/player_script/fall_state.gd" id="6_oh5ij"]
 [ext_resource type="Script" uid="uid://by1uur5fg6pm0" path="res://script/player_script/dash_state.gd" id="8_g2vtq"]
+[ext_resource type="Texture2D" uid="uid://1ugfvkrhjwmi" path="res://assets/player/particle2.png" id="11_ihjo1"]
+
+[sub_resource type="Animation" id="Animation_ihjo1"]
+resource_name = "Attack_Bow_Normal"
+length = 0.49
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerBow&ArrowSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666666, 0.13333333, 0.20000005, 0.43333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/BowDrawSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.43333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 0]
+}
 
 [sub_resource type="Animation" id="Animation_g2vtq"]
 resource_name = "Move_Dash"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +61,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +78,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +94,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -80,7 +111,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -95,7 +126,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -104,9 +135,34 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerBow&ArrowSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Marker2D/BowDrawSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s4jxa"]
 _data = {
+&"Attack_Bow_Normal": SubResource("Animation_ihjo1"),
 &"Move_Dash": SubResource("Animation_g2vtq"),
 &"Move_Fall": SubResource("Animation_hp4bs"),
 &"Move_Idle": SubResource("Animation_hjaqi"),
@@ -118,6 +174,27 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
 size = Vector2(13, 15)
 
+[sub_resource type="Curve" id="Curve_dk1vr"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8467434, 0.96221876), 0.0, 0.0, 0, 0, Vector2(1, 0.52331185), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_34jf3"]
+curve = SubResource("Curve_dk1vr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7b46"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 49.999996
+linear_accel_max = 49.999996
+scale_min = 2.0
+scale_max = 4.0
+scale_over_velocity_curve = SubResource("CurveTexture_34jf3")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_hp4bs")
 
@@ -126,7 +203,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_s4jxa")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerBow&ArrowSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_2fvbb")
+hframes = 4
+
+[node name="PlayerBasicMovementSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_xo3ru")
 hframes = 4
 vframes = 4
@@ -134,6 +216,17 @@ vframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_hjaqi")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="BowDrawSprite" type="Sprite2D" parent="Marker2D"]
+visible = false
+position = Vector2(19, 0)
+rotation = 2.3561945
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("3_ml7e8")
+hframes = 5
+frame = 1
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_fvtld")
@@ -161,6 +254,15 @@ one_shot = true
 [node name="DashCooldownTimer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.5
 one_shot = true
+
+[node name="CloudDashPoof" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = ExtResource("11_ihjo1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_u7b46")
 
 [connection signal="timeout" from="StateMachine/DashState/DashTimer" to="StateMachine/DashState" method="_on_dash_time_timeout"]
 [connection signal="timeout" from="StateMachine/DashState/DashCooldownTimer" to="StateMachine/DashState" method="_on_dash_cooldown_time_timeout"]

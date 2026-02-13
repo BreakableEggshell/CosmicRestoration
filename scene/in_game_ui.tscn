@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://x7dgxtqp582b"]
+[gd_scene load_steps=4 format=3 uid="uid://x7dgxtqp582b"]
 
 [ext_resource type="FontFile" uid="uid://b530drqsyyyst" path="res://assets/ui/PixelOperator8.ttf" id="1_e3ply"]
 [ext_resource type="Script" uid="uid://cgloju0deayt6" path="res://script/in_game_ui.gd" id="1_nrwpf"]
+[ext_resource type="Script" uid="uid://sev32w8r16tk" path="res://script/fps_counter.gd" id="3_hwr0b"]
 
 [node name="InGameUI" type="Control"]
 layout_mode = 3
@@ -36,10 +37,24 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_e3ply")
 theme_override_font_sizes/font_size = 8
-text = "Dash Cooldown:"
+text = "Dash
+Cooldown:"
+horizontal_alignment = 1
 
 [node name="CooldownTime" type="Label" parent="PlayerUI/DashCooldown/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_e3ply")
 text = "0"
+
+[node name="FPS" type="MarginContainer" parent="PlayerUI"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="PlayerUI/FPS"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_e3ply")
+theme_override_font_sizes/font_size = 8
+text = "FPS"
+script = ExtResource("3_hwr0b")

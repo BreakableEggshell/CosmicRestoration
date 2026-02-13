@@ -6,9 +6,12 @@ var dash_direction := 0
 
 var dash_ready = true
 
+@onready var cloud_dash_poof: GPUParticles2D = $"../../CloudDashPoof"
+
 func enter():
 	print("Entering dash state")
 	player_animation.play("Move_Dash")
+	cloud_dash_poof.restart()
 
 	# Check which direction to dash into, and dash to that
 	dash_direction = Input.get_axis("move_left", "move_right")

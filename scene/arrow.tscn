@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d13fd6ik8i4xq"]
+
+[ext_resource type="Texture2D" uid="uid://dq3qegqi72o6a" path="res://assets/player/sag_arrow.png" id="1_rufgg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rufgg"]
+radius = 1.0
+height = 22.0
+
+[node name="Arrow" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rufgg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 2.3561945
+texture = ExtResource("1_rufgg")

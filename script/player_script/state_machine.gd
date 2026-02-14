@@ -4,7 +4,6 @@ class_name StateMachine
 @export var initial_state: State
 @onready var player: CharacterBody2D = get_parent()
 
-
 var current_state: State
 var states: Dictionary = {}
 

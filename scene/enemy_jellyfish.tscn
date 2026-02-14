@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs2bh1tv2vm7f"]
+[gd_scene load_steps=7 format=3 uid="uid://cs2bh1tv2vm7f"]
 
 [ext_resource type="Texture2D" uid="uid://usq2df8k1soe" path="res://assets/jellyfish_draft.png" id="1_1ho78"]
+[ext_resource type="Script" uid="uid://cdg0b65fjnaib" path="res://script/enemy_jellyfish.gd" id="1_1ic1q"]
 
 [sub_resource type="Animation" id="Animation_1ho78"]
 resource_name = "Jellyfish_Idle"
@@ -45,6 +46,8 @@ radius = 5.0
 height = 24.0
 
 [node name="Jellyfish" type="CharacterBody2D"]
+script = ExtResource("1_1ic1q")
+max_health = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1ho78")

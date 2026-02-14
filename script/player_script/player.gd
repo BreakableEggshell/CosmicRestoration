@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 signal dash_cooldown_updated(time_left)
 

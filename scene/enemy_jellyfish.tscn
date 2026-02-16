@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cs2bh1tv2vm7f"]
 
-[ext_resource type="Texture2D" uid="uid://usq2df8k1soe" path="res://assets/jellyfish_draft.png" id="1_1ho78"]
 [ext_resource type="Script" uid="uid://cdg0b65fjnaib" path="res://script/enemy_jellyfish.gd" id="1_1ic1q"]
+[ext_resource type="Texture2D" uid="uid://b3f0hym5ckoeq" path="res://assets/enemy/jellyfish_draft.png" id="2_1ic1q"]
 
 [sub_resource type="Animation" id="Animation_1ho78"]
 resource_name = "Jellyfish_Idle"
@@ -45,12 +45,12 @@ _data = {
 radius = 5.0
 height = 24.0
 
-[node name="Jellyfish" type="CharacterBody2D"]
+[node name="EnemyJellyfish" type="CharacterBody2D"]
 script = ExtResource("1_1ic1q")
 max_health = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_1ho78")
+texture = ExtResource("2_1ic1q")
 hframes = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -58,6 +58,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_n0kmj")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_hnh31")

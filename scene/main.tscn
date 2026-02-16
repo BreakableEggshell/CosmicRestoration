@@ -179,4 +179,4 @@ process_material = SubResource("ParticleProcessMaterial_tqoya")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Jellyfish" parent="Enemies" instance=ExtResource("6_4j5ol")]
-position = Vector2(1007, 210)
+position = Vector2(981, 245)

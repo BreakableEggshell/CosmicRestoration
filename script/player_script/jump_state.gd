@@ -1,9 +1,18 @@
 extends State
 class_name JumpState
 
+@onready var audio = $"../../Audio"
+@onready var jump_sfx = [
+	$"../../Audio/Jump/jump_sfx_1",
+	$"../../Audio/Jump/jump_sfx_2",
+	$"../../Audio/Jump/jump_sfx_3",
+]
+
 func enter():
 	print("Entering jump state")
 	player_animation.play("Move_Jump")
+	jump_sfx.pick_random().play()
+	
 	var character = state_machine.player
 	character.velocity.y =  JUMP_VELOCITY
 

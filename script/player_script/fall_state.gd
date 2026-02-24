@@ -9,7 +9,9 @@ func physics_update(delta: float):
 	var character = state_machine.player
 	
 	# Apply gravity to player
-	character.velocity.y += GRAVITY * delta
+	character.velocity.y += GRAVITY * delta * 0.05
+	if Input.is_action_pressed("move_down"):
+		character.velocity.y += GRAVITY * delta * 0.75  # extra downward force
 	
 	# Let player move move left or right while in air
 	var direction = Input.get_axis("move_left", "move_right")

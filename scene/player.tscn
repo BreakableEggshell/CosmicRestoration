@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://dhdt7j761e223"]
+[gd_scene format=3 uid="uid://dhdt7j761e223"]
 
 [ext_resource type="Script" uid="uid://dlvy6jx5xikwe" path="res://script/player_script/player.gd" id="1_hp4bs"]
-[ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/player/MC_SpriteSheet.png" id="1_xo3ru"]
 [ext_resource type="Texture2D" uid="uid://ch1hkr7ihqv7n" path="res://assets/player/player_bow_spritesheet.png" id="2_ihjo1"]
 [ext_resource type="Script" uid="uid://3u76ojdj5gay" path="res://script/player_script/state_machine.gd" id="3_fvtld"]
 [ext_resource type="Texture2D" uid="uid://bp8ddnwfnrgl1" path="res://assets/player/sag_bow_draw_with_arrow.png" id="3_ml7e8"]
@@ -12,8 +11,15 @@
 [ext_resource type="Script" uid="uid://0fjsm4bxdi87" path="res://script/player_script/jump_state.gd" id="6_g2vtq"]
 [ext_resource type="Script" uid="uid://1htppsfdx5t5" path="res://script/player_script/fall_state.gd" id="6_oh5ij"]
 [ext_resource type="Script" uid="uid://by1uur5fg6pm0" path="res://script/player_script/dash_state.gd" id="8_g2vtq"]
+[ext_resource type="Script" uid="uid://c75evmkoqe0yx" path="res://scene/hurt_state.gd" id="11_iuf2t"]
 [ext_resource type="Script" uid="uid://b1dsdq8opt3v7" path="res://script/player_script/bow_shoot_tap.gd" id="12_34jf3"]
 [ext_resource type="Texture2D" uid="uid://bnhxo0b544rwx" path="res://assets/player/particle.png" id="13_34jf3"]
+[ext_resource type="AudioStream" uid="uid://bjgvxn84wn56n" path="res://audio/jump_v2_1.mp3" id="15_iuf2t"]
+[ext_resource type="AudioStream" uid="uid://wli2bh0w313w" path="res://audio/jump_v2_2.mp3" id="16_jrjdb"]
+[ext_resource type="AudioStream" uid="uid://dvwux5est24o8" path="res://audio/jump_v2_3.mp3" id="17_kk4ol"]
+[ext_resource type="AudioStream" uid="uid://duqbx5w1h0n0t" path="res://audio/dash_1.mp3" id="18_4reak"]
+[ext_resource type="AudioStream" uid="uid://js8l850jgdyy" path="res://audio/dash_2.mp3" id="19_wt23p"]
+[ext_resource type="AudioStream" uid="uid://dpf2dqf1l0x16" path="res://audio/dash_3.mp3" id="20_k8m7u"]
 
 [sub_resource type="Animation" id="Animation_dk1vr"]
 resource_name = "Bow_Hold_Attack"
@@ -112,6 +118,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_jrjdb"]
+resource_name = "Move_Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerBasicMovementSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_hjaqi"]
@@ -221,11 +242,15 @@ _data = {
 &"Bow_Tap_Attack": SubResource("Animation_ihjo1"),
 &"Move_Dash": SubResource("Animation_g2vtq"),
 &"Move_Fall": SubResource("Animation_hp4bs"),
+&"Move_Hurt": SubResource("Animation_jrjdb"),
 &"Move_Idle": SubResource("Animation_hjaqi"),
 &"Move_Jump": SubResource("Animation_s4jxa"),
 &"Move_Walk": SubResource("Animation_ct4mp"),
 &"RESET": SubResource("Animation_fvtld")
 }
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kk4ol"]
+load_path = "res://.godot/imported/MC_SpriteSheet.png-7a3ccc5d8d848dafad085dacff8e9029.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
 size = Vector2(13, 15)
@@ -252,36 +277,34 @@ linear_accel_max = 49.999996
 scale_max = 3.0
 scale_over_velocity_curve = SubResource("CurveTexture_34jf3")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=836617573]
 script = ExtResource("1_hp4bs")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_s4jxa")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2001606166]
+libraries/ = SubResource("AnimationLibrary_s4jxa")
 
-[node name="PlayerBasicMovementSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_xo3ru")
+[node name="PlayerBasicMovementSprite" type="Sprite2D" parent="." unique_id=1492699304]
+texture = SubResource("CompressedTexture2D_kk4ol")
 hframes = 4
 vframes = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=967621947]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_hjaqi")
 
-[node name="BowAnimation" type="Node2D" parent="."]
+[node name="BowAnimation" type="Node2D" parent="." unique_id=830550930]
 script = ExtResource("3_u7b46")
 
-[node name="PlayerBow&ArrowSprite" type="Sprite2D" parent="BowAnimation"]
+[node name="PlayerBow&ArrowSprite" type="Sprite2D" parent="BowAnimation" unique_id=1470880545]
 texture = ExtResource("2_ihjo1")
 hframes = 4
 vframes = 2
 
-[node name="Marker2D" type="Marker2D" parent="BowAnimation"]
+[node name="Marker2D" type="Marker2D" parent="BowAnimation" unique_id=843192780]
 rotation = -1.5707964
 script = ExtResource("4_dk1vr")
 
-[node name="BowDrawSprite" type="Sprite2D" parent="BowAnimation/Marker2D"]
+[node name="BowDrawSprite" type="Sprite2D" parent="BowAnimation/Marker2D" unique_id=212923602]
 position = Vector2(19, 0)
 rotation = 2.3561945
 scale = Vector2(0.9999999, 0.9999999)
@@ -289,48 +312,52 @@ texture = ExtResource("3_ml7e8")
 hframes = 5
 frame = 1
 
-[node name="ShootingPoint" type="Marker2D" parent="BowAnimation/Marker2D/BowDrawSprite"]
+[node name="ShootingPoint" type="Marker2D" parent="BowAnimation/Marker2D/BowDrawSprite" unique_id=1443517980]
 position = Vector2(-3.5355341, -3.5355349)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=212882840 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_fvtld")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine"]
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=1903579830]
 script = ExtResource("4_oh5ij")
 
-[node name="WalkState" type="Node" parent="StateMachine"]
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=575774338]
 script = ExtResource("5_hp4bs")
 
-[node name="JumpState" type="Node" parent="StateMachine"]
+[node name="JumpState" type="Node" parent="StateMachine" unique_id=491778532]
 script = ExtResource("6_g2vtq")
 
-[node name="FallState" type="Node" parent="StateMachine"]
+[node name="FallState" type="Node" parent="StateMachine" unique_id=295460750]
 script = ExtResource("6_oh5ij")
 
-[node name="DashState" type="Node" parent="StateMachine"]
+[node name="HurtState" type="Node" parent="StateMachine" unique_id=956551510]
+script = ExtResource("11_iuf2t")
+metadata/_custom_type_script = "uid://3u76ojdj5gay"
+
+[node name="DashState" type="Node" parent="StateMachine" unique_id=212434336]
 script = ExtResource("8_g2vtq")
 
-[node name="DashTimer" type="Timer" parent="StateMachine/DashState"]
+[node name="DashTimer" type="Timer" parent="StateMachine/DashState" unique_id=1598685676]
 wait_time = 0.15
 one_shot = true
 
-[node name="DashCooldownTimer" type="Timer" parent="StateMachine/DashState"]
+[node name="DashCooldownTimer" type="Timer" parent="StateMachine/DashState" unique_id=719929790]
 wait_time = 0.5
 one_shot = true
 
-[node name="BowShootTap" type="Node" parent="StateMachine"]
+[node name="BowShootTap" type="Node" parent="StateMachine" unique_id=1625336376]
 script = ExtResource("12_34jf3")
 
-[node name="PlayerShootingTimer" type="Timer" parent="StateMachine/BowShootTap"]
+[node name="PlayerShootingTimer" type="Timer" parent="StateMachine/BowShootTap" unique_id=675463393]
 wait_time = 0.49
 one_shot = true
 
-[node name="TimerBeforeFire" type="Timer" parent="StateMachine/BowShootTap"]
+[node name="TimerBeforeFire" type="Timer" parent="StateMachine/BowShootTap" unique_id=1290067299]
 wait_time = 0.5
 one_shot = true
 
-[node name="CloudDashPoof" type="GPUParticles2D" parent="."]
+[node name="CloudDashPoof" type="GPUParticles2D" parent="." unique_id=825135351]
 emitting = false
 amount = 20
 texture = ExtResource("13_34jf3")
@@ -338,6 +365,37 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_u7b46")
+
+[node name="Audio" type="Node" parent="." unique_id=131132778]
+
+[node name="Jump" type="Node" parent="Audio" unique_id=1040961334]
+
+[node name="jump_sfx_1" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1120285314]
+stream = ExtResource("15_iuf2t")
+volume_db = -8.0
+max_polyphony = 4
+
+[node name="jump_sfx_2" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=1453542983]
+stream = ExtResource("16_jrjdb")
+volume_db = -8.0
+
+[node name="jump_sfx_3" type="AudioStreamPlayer" parent="Audio/Jump" unique_id=318369967]
+stream = ExtResource("17_kk4ol")
+volume_db = -8.0
+
+[node name="Dash" type="Node" parent="Audio" unique_id=1972958370]
+
+[node name="dash_sfx_1" type="AudioStreamPlayer" parent="Audio/Dash" unique_id=1986593915]
+stream = ExtResource("18_4reak")
+volume_db = -8.0
+
+[node name="dash_sfx_2" type="AudioStreamPlayer" parent="Audio/Dash" unique_id=1622021189]
+stream = ExtResource("19_wt23p")
+volume_db = -8.0
+
+[node name="dash_sfx_3" type="AudioStreamPlayer" parent="Audio/Dash" unique_id=2053184574]
+stream = ExtResource("20_k8m7u")
+volume_db = -8.0
 
 [connection signal="timeout" from="StateMachine/DashState/DashTimer" to="StateMachine/DashState" method="_on_dash_time_timeout"]
 [connection signal="timeout" from="StateMachine/DashState/DashCooldownTimer" to="StateMachine/DashState" method="_on_dash_cooldown_time_timeout"]

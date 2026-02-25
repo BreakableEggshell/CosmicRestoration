@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://dhdt7j761e223"]
 
 [ext_resource type="Script" uid="uid://dlvy6jx5xikwe" path="res://script/player_script/player.gd" id="1_hp4bs"]
-[ext_resource type="Texture2D" uid="uid://ch1hkr7ihqv7n" path="res://assets/player/player_bow_spritesheet.png" id="2_ihjo1"]
+[ext_resource type="Texture2D" uid="uid://bpa3e8e2bfxmu" path="res://assets/player/MC_SpriteSheet.png" id="2_jrjdb"]
 [ext_resource type="Script" uid="uid://3u76ojdj5gay" path="res://script/player_script/state_machine.gd" id="3_fvtld"]
 [ext_resource type="Texture2D" uid="uid://bp8ddnwfnrgl1" path="res://assets/player/sag_bow_draw_with_arrow.png" id="3_ml7e8"]
 [ext_resource type="Script" uid="uid://bpvk3wb2rtp58" path="res://script/bow.gd" id="3_u7b46"]
 [ext_resource type="Script" uid="uid://co65ngstjr8bj" path="res://script/player_script/bow_pivot_point.gd" id="4_dk1vr"]
+[ext_resource type="Texture2D" uid="uid://bc0m8btcny7ot" path="res://assets/player/MC_bow_attacks.png" id="4_jrjdb"]
 [ext_resource type="Script" uid="uid://de6ukd555qmqk" path="res://script/player_script/idle_state.gd" id="4_oh5ij"]
 [ext_resource type="Script" uid="uid://cyamrgxstbyb7" path="res://script/player_script/walk_state.gd" id="5_hp4bs"]
 [ext_resource type="Script" uid="uid://0fjsm4bxdi87" path="res://script/player_script/jump_state.gd" id="6_g2vtq"]
@@ -14,12 +15,12 @@
 [ext_resource type="Script" uid="uid://c75evmkoqe0yx" path="res://scene/hurt_state.gd" id="11_iuf2t"]
 [ext_resource type="Script" uid="uid://b1dsdq8opt3v7" path="res://script/player_script/bow_shoot_tap.gd" id="12_34jf3"]
 [ext_resource type="Texture2D" uid="uid://bnhxo0b544rwx" path="res://assets/player/particle.png" id="13_34jf3"]
-[ext_resource type="AudioStream" uid="uid://bjgvxn84wn56n" path="res://audio/jump_v2_1.mp3" id="15_iuf2t"]
-[ext_resource type="AudioStream" uid="uid://wli2bh0w313w" path="res://audio/jump_v2_2.mp3" id="16_jrjdb"]
-[ext_resource type="AudioStream" uid="uid://dvwux5est24o8" path="res://audio/jump_v2_3.mp3" id="17_kk4ol"]
-[ext_resource type="AudioStream" uid="uid://duqbx5w1h0n0t" path="res://audio/dash_1.mp3" id="18_4reak"]
-[ext_resource type="AudioStream" uid="uid://js8l850jgdyy" path="res://audio/dash_2.mp3" id="19_wt23p"]
-[ext_resource type="AudioStream" uid="uid://dpf2dqf1l0x16" path="res://audio/dash_3.mp3" id="20_k8m7u"]
+[ext_resource type="AudioStream" uid="uid://cn6527375571v" path="res://audio/jump1.wav" id="15_iuf2t"]
+[ext_resource type="AudioStream" uid="uid://bg4n34yd8odj3" path="res://audio/jump2.wav" id="16_jrjdb"]
+[ext_resource type="AudioStream" uid="uid://b0ojyt6artuyj" path="res://audio/jump3.wav" id="17_kk4ol"]
+[ext_resource type="AudioStream" uid="uid://du05k6t7s1vhn" path="res://audio/dash1.wav" id="18_iuf2t"]
+[ext_resource type="AudioStream" uid="uid://c5335qd43tolu" path="res://audio/dash2.wav" id="19_jrjdb"]
+[ext_resource type="AudioStream" uid="uid://de2mamlap0fy5" path="res://audio/dash3.wav" id="20_kk4ol"]
 
 [sub_resource type="Animation" id="Animation_dk1vr"]
 resource_name = "Bow_Hold_Attack"
@@ -100,7 +101,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [12]
 }
 
@@ -116,7 +117,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [11]
 }
 
@@ -131,7 +132,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(),
 "transitions": PackedFloat32Array(),
-"update": 1,
+"update": 0,
 "values": []
 }
 
@@ -148,7 +149,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.73333335),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [0, 1]
 }
 
@@ -164,7 +165,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [10]
 }
 
@@ -181,7 +182,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [4, 5]
 }
 
@@ -196,7 +197,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [0]
 }
 tracks/1/type = "value"
@@ -249,9 +250,6 @@ _data = {
 &"RESET": SubResource("Animation_fvtld")
 }
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kk4ol"]
-load_path = "res://.godot/imported/MC_SpriteSheet.png-7a3ccc5d8d848dafad085dacff8e9029.ctex"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
 size = Vector2(13, 15)
 
@@ -277,14 +275,14 @@ linear_accel_max = 49.999996
 scale_max = 3.0
 scale_over_velocity_curve = SubResource("CurveTexture_34jf3")
 
-[node name="Player" type="CharacterBody2D" unique_id=836617573]
+[node name="Player" type="CharacterBody2D" unique_id=836617573 groups=["player"]]
 script = ExtResource("1_hp4bs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2001606166]
 libraries/ = SubResource("AnimationLibrary_s4jxa")
 
 [node name="PlayerBasicMovementSprite" type="Sprite2D" parent="." unique_id=1492699304]
-texture = SubResource("CompressedTexture2D_kk4ol")
+texture = ExtResource("2_jrjdb")
 hframes = 4
 vframes = 4
 
@@ -296,7 +294,7 @@ shape = SubResource("RectangleShape2D_hjaqi")
 script = ExtResource("3_u7b46")
 
 [node name="PlayerBow&ArrowSprite" type="Sprite2D" parent="BowAnimation" unique_id=1470880545]
-texture = ExtResource("2_ihjo1")
+texture = ExtResource("4_jrjdb")
 hframes = 4
 vframes = 2
 
@@ -386,15 +384,15 @@ volume_db = -8.0
 [node name="Dash" type="Node" parent="Audio" unique_id=1972958370]
 
 [node name="dash_sfx_1" type="AudioStreamPlayer" parent="Audio/Dash" unique_id=1986593915]
-stream = ExtResource("18_4reak")
+stream = ExtResource("18_iuf2t")
 volume_db = -8.0
 
 [node name="dash_sfx_2" type="AudioStreamPlayer" parent="Audio/Dash" unique_id=1622021189]
-stream = ExtResource("19_wt23p")
+stream = ExtResource("19_jrjdb")
 volume_db = -8.0
 
 [node name="dash_sfx_3" type="AudioStreamPlayer" parent="Audio/Dash" unique_id=2053184574]
-stream = ExtResource("20_k8m7u")
+stream = ExtResource("20_kk4ol")
 volume_db = -8.0
 
 [connection signal="timeout" from="StateMachine/DashState/DashTimer" to="StateMachine/DashState" method="_on_dash_time_timeout"]
